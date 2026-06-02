@@ -19,7 +19,7 @@ Sphere::Sphere(float ox, float oy, float oz, float rad) {
     if (rad >= 0)
         this->radius = rad;
     else
-        this->radius = 0;
+        this->radius = rad;
 }
 
 float* Sphere::getOrigin() {
@@ -34,7 +34,7 @@ float Sphere::getRadius() {
 void Sphere::setOrigin(float ox, float oy, float oz) {
     this->orig_x = ox;
     this->orig_y = oy;
-    this->orig_z = oy;
+    this->orig_z = oz;
 }
 
 void Sphere::setRadius(float rad) {
@@ -43,7 +43,7 @@ void Sphere::setRadius(float rad) {
 
 bool Sphere::intersect(Sphere& other) {
     float dist = sqrt(pow(this->orig_x - other.orig_x, 2) + pow(this->orig_y - other.orig_y, 2) + pow(this->orig_z - other.orig_z, 2));
-    return true;
+    return dist <= (this->radius + other.radius);
 }
 
 float Sphere::SurfaceArea() {
@@ -51,10 +51,10 @@ float Sphere::SurfaceArea() {
 }
 
 float Sphere::Volume() {
-    return (4 / 3) * M_PI * pow(this->radius, 2);
+    (4.0 / 3.0) * M_PI * pow(this->radius, 3);
 }
 
 ostream& operator<<(ostream& os, const Sphere& sphere) {
-    os << "[( " << sphere.orig_x << ", " << sphere.orig_y << ", " << sphere.orig_z << "), " << sphere.radius << "]";
+    os << "[( " << sphere.orig_x << ", " << sphere.orig_y << ", " << sphere.orig_z <(4.0 / 3.0) * M_PI * pow(this->radius, 3);< "), " << sphere.radius << "]";
     return os;
 }
